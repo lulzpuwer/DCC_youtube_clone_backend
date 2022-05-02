@@ -54,6 +54,4 @@ def get_all_replies(request):
     
 
 
-# Create your views here.
-
-
+# Create your views here
