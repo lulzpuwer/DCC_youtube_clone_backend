@@ -19,6 +19,7 @@ def get_all_comments(request):
     return Response(serializer.data)
 
 
+
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def user_comments(request):
@@ -36,6 +37,7 @@ def user_comments(request):
         return Response(serializer.data)
 
 
+
 @api_view(['POST', 'GET'])
 @permission_classes([IsAuthenticated])
 def get_all_replies(request):
@@ -51,6 +53,28 @@ def get_all_replies(request):
         reply = Reply.objects.filter(user_id=request.user.id)
         serializer = ReplySerializer(reply, many=True)
         return Response(serializer.data)
+
+
+
+@api_view(['PUT', 'GET', 'POST'])
+@permission_classes([IsAuthenticated])    
+def update_comment(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    if request.method == 'PUT':
+        serializer = CommentSerializer(comment, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+    elif request.method == 'GET':
+        reply = Reply.objects.filter(comment_id=pk)
+        serializer = ReplySerializer(reply, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        reply = get_object_or_404(Reply, comment_id=pk)
+        serializer = ReplySerializer(reply, data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
     
 
 
