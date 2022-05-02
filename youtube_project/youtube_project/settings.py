@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'youtube_app.apps.YoutubeAppConfig',
+    'youtube_app.models.Comment',
+    'youtube_app.models.Reply'
 ]
 
 MIDDLEWARE = [

@@ -57,7 +57,7 @@ def get_all_replies(request):
 
 
 @api_view(['PUT', 'GET', 'POST'])
-@permission_classes([IsAuthenticated])    
+@permission_classes([IsAuthenticated])
 def update_comment(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     if request.method == 'PUT':
