@@ -14,9 +14,12 @@ from .serializers import ReplySerializer
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def get_all_comments(request):
-    comment = Comment.objects.all()
-    serializer = CommentSerializer(comment, many=True)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        comment = Comment.objects.all()
+        serializer = CommentSerializer(comment, many=True)
+        return Response(serializer.data, status = status.HTTP_200_OK)
+
+    
 
 
 
