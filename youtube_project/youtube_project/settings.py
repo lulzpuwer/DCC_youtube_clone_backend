@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework_simplejwt',
     'youtube_app.apps.YoutubeAppConfig',
-    # 'youtube_app.models.Comment',
-    # 'youtube_app.models.Reply'
+    'youtube_app',
+  
 ]
 
 MIDDLEWARE = [
